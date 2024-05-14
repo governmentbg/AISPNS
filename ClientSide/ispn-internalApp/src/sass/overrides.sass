@@ -1,0 +1,519 @@
+@import variables
+@import 'vuetify/src/styles/main.sass'
+@import vuetify-material/sidebar
+@import vuetify-material/appbar
+@import vuetify-material/buttons
+@import vuetify-material/pagination
+@import vuetify-material/badge
+@import vuetify-material/footer
+@import vuetify-material/view
+@import vuetify-material/settings
+@import vuetify-material/card
+@import vuetify-material/table
+@import vuetify-material/vectormap
+@import vuetify-material/tab
+@import vuetify-material/notification
+@import vuetify-material/modal
+@import vuetify-material/form
+@import vuetify-material/map
+@import vuetify-material/timeline
+@import vuetify-material/chip
+@import vuetify-material/calendar
+@import vuetify-material/pages
+@import vuetify-material/rtl
+@import vuetify-material/stepper
+@import vuetify-material/extension-panels
+@import kendo/all
+
+
+html, body
+  font-size: 0.95rem
+  height: 100%
+  // zoom: 90%
+
+body
+  position: relative
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active
+  -webkit-box-shadow: 0 0 0 30px white inset !important
+
+.v-btn.v-size--default,
+.v-btn.v-size--large
+  &:not(.v-btn--icon):not(.v-btn--fab)
+    padding: 0 30px
+
+
+button
+  &:disabled
+    cursor: not-allowed !important
+    pointer-events: all
+// .v-btn.v-size--small
+//   height: 28px !important
+//   min-width: 50px
+//   padding: 0 12.4444444444px !important
+//   font-size: 0.75rem !important
+
+.v-btn.v-size--big-height
+  height: 100px !important
+  width: 100% !important
+  font-size: 19px !important
+
+// table .v-btn.v-size--small
+//   min-width: 50px !important
+
+.theme--dark.v-application
+  background: transparent !important
+
+.theme--light.v-btn.no-hover:hover::before
+  opacity: 0 
+
+.theme--light.v-btn.hover-primary:hover
+  color: #184c7c
+
+.theme--light.v-btn 
+  color: rgb(0, 0, 0, 0.7)
+
+.theme--light.v-list-item .v-list-item__action-text,
+.theme--light.v-list-item .v-list-item__subtitle
+  color: #999
+
+.v-list-item .v-list-item__title, 
+.v-list-item .v-list-item__subtitle
+  white-space: initial
+
+
+.theme--light.v-text-field>.v-input__control>.v-input__slot:before
+  border-color: #d2d2d2
+
+.v-label.v-label,
+.v-alert.v-alert
+  font-size: 0.90rem
+
+.theme--light .v-main
+  background-color: #eee
+
+.container
+  padding-top: 40px
+  padding-bottom: 20px
+
+  &.full-height
+    height: 100%
+
+.v-list--two-line .v-list-item, .v-list-item--two-line
+  //min-height: 97px
+  min-height: 75px
+  .v-list-item__content
+    padding: 0 !important
+
+
+.snotify 
+  width: auto
+//   max-width: 450px
+
+.snotify-warning .snotifyToast__inner,
+.snotify-error .snotifyToast__inner,
+.snotify-success .snotifyToast__inner,
+.snotify-success .snotifyToast__inner .snotifyToast__body
+   color: #ffffff !important
+//   display: block
+//   padding: 25px 20px
+//   min-width: 300px
+//   min-height: auto
+
+.v-image.no-border-radius .v-image__image 
+  border-radius: 0 !important
+
+.v-text-field 
+  padding-top: 3px
+  margin-top: 0px
+
+.col-xl, .col-xl-auto, .col-xl-12, .col-xl-11, .col-xl-10, .col-xl-9, .col-xl-8, .col-xl-7, .col-xl-6, .col-xl-5, .col-xl-4, .col-xl-3, .col-xl-2, .col-xl-1, .col-lg, .col-lg-auto, .col-lg-12, .col-lg-11, .col-lg-10, .col-lg-9, .col-lg-8, .col-lg-7, .col-lg-6, .col-lg-5, .col-lg-4, .col-lg-3, .col-lg-2, .col-lg-1, .col-md, .col-md-auto, .col-md-12, .col-md-11, .col-md-10, .col-md-9, .col-md-8, .col-md-7, .col-md-6, .col-md-5, .col-md-4, .col-md-3, .col-md-2, .col-md-1, .col-sm, .col-sm-auto, .col-sm-12, .col-sm-11, .col-sm-10, .col-sm-9, .col-sm-8, .col-sm-7, .col-sm-6, .col-sm-5, .col-sm-4, .col-sm-3, .col-sm-2, .col-sm-1, .col, .col-auto, .col-12, .col-11, .col-10, .col-9, .col-8, .col-7, .col-6, .col-5, .col-4, .col-3, .col-2, .col-1
+  padding: 4px 12px
+
+
+.v-tabs-bar
+  .v-tab
+    color: $primary !important
+
+  .v-tab.v-tab--active
+    background: $primary
+    color: white !important
+
+
+
+
+.loading-circle
+  width: 90px !important
+  height: 90px !important
+  border-radius: 100%
+  margin-left: 13px
+  border: 2px solid transparent !important
+  border-left-color: #fff !important
+
+.loading-text 
+  font-family: "Roboto", sans-serif !important
+  margin-top: 25px !important
+  color: #fff !important
+  font-size: 1rem !important
+  text-align: center
+  text-transform: uppercase
+
+.v-dialog--active
+  margin-left: 3px
+  margin-right: 3px
+
+  .v-time-picker-custom 
+    .v-picker__title 
+      border-radius: 0 !important
+
+  .v-picker--full-width
+    .v-picker__title
+      border-radius: 0 !important
+
+  // .v-item-group.v-slide-group.v-tabs-bar
+  //   .v-slide-group__wrapper
+  //     .v-tabs-slider-wrapper
+  //       color: #1768b3 !important
+
+  //     .v-tab
+  //       opacity: 1
+  //       background-color: #005538
+
+
+// input number fix padding
+input::-webkit-outer-spin-button, 
+input::-webkit-inner-spin-button
+  margin-left: 3px
+
+.v-messages
+  font-size: 0.7rem
+
+@media print 
+
+  html, body
+    width: 210mm
+    height: 297mm
+    margin: 0
+  
+  .v-main
+    padding: 0 0 0 6pt !important
+    display: block
+    background-color: #fff !important
+
+    .container 
+      padding: 0 2pt
+
+      .v-card 
+        padding: 0 !important
+
+        table 
+          page-break-inside: auto
+
+        table > thead > tr > th 
+          font-size: 8pt !important
+          padding: 0 3pt !important
+          font-weight: bold
+
+        table > thead > tr > th > i
+          display: none !important
+
+        table > tbody > tr > td
+          font-size: 7pt !important
+          padding: 0 3pt !important
+
+        table > tbody > tr
+          page-break-inside: avoid
+          page-break-after: auto
+
+.version 
+  padding: 15px 0
+  color: #98aec3
+  font-size: 0.6rem
+  font-weight: bold
+  text-align: center
+  text-transform: uppercase
+
+
+h1
+  font-size: 2.2rem
+  font-weight: 700
+  line-height: 1.2
+  margin-bottom: 0.5rem
+
+h2
+  font-size: 1.8rem
+  line-height: 1.2
+  font-weight: 500
+  margin-bottom: 0.5rem
+
+h3
+  font-size: 1.5rem
+  color: #444
+
+h4
+  font-size: 1.1rem
+  color: #444
+
+h5
+  font-size: 1.1rem
+  color: #444
+
+h6
+  font-size: 0.9rem
+  color: #444
+
+.theme--dark
+  h1
+    color: rgba(255, 255, 255, 0.7)
+  h2
+    color: rgba(255, 255, 255, 0.7)
+  h3
+    color: rgba(255, 255, 255, 0.7)
+  h4
+    color: rgba(255, 255, 255, 0.7)
+  h5
+    color: rgba(255, 255, 255, 0.7)
+  h6
+    color: rgba(255, 255, 255, 0.7)
+
+.hidden 
+  display: none !important
+
+
+a.v-tab.no-data 
+  //background: #eeeeee
+  background-color: #f7f7f7
+  /* color: #0055388c !important; */
+  color: #b5b5b5 !important
+
+a.v-tab.v-tab--active.no-data
+  background: #1b61ac8a
+  color: #ffffffe8 !important
+
+.no-background-hover::before 
+   background-color: transparent !important
+
+.v-navigation-drawer__content .v-text-field__details
+  display: none
+
+
+/* carousel */
+
+.v-carousel--hide-delimiter-background .v-carousel__controls
+  background: linear-gradient(0deg, rgba(70, 6, 19, 0.8) 80%, transparent)
+
+.theme--dark
+  .v-carousel--hide-delimiter-background .v-carousel__controls
+    background: #1E1E1E
+
+/* end carousel */
+
+/* helpers */
+  
+.text-underline
+  text-decoration: underline !important
+
+.italic 
+  font-style: italic !important
+
+.fw100
+  font-weight: 100 !important
+.fw200
+  font-weight: 200 !important
+.fw300
+  font-weight: 300 !important
+.fw400
+  font-weight: 400 !important
+.fw500
+  font-weight: 500 !important
+.fw600
+  font-weight: 600 !important
+.fw700
+  font-weight: 700 !important
+.fw800
+  font-weight: 800 !important
+.fw900
+  font-weight: 900 !important
+
+.w-auto	
+  width: auto !important
+.w-0
+  width: 0 !important
+.w-25	
+  width: 25% !important
+.w-50	
+  width: 50% !important
+.w-75	
+  width: 75% !important
+.w-100
+  width: 100% !important
+
+.border-top-radiusless
+  border-top-left-radius: 0px !important
+  border-top-right-radius: 0px !important
+
+.border-bottom-radiusless
+  border-bottom-left-radius: 0px !important
+  border-bottom-right-radius: 0px !important
+  
+/* tooltips */
+.v-tooltip__content.menuable__content__active
+  padding: 3px 16px
+  font-size: 0.8rem
+  //box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 75%), 0px 4px 5px 0px rgb(0 0 0 / 59%), 0px 1px 10px 0px rgb(0 0 0 / 40%) !important
+  //z-index: 10 !important
+  //font-size: 1rem
+
+.theme--dark
+  .v-tooltip__content.menuable__content__active
+    opacity: 1
+
+  
+  
+
+// remove arrows from input type number
+input[type='number']
+  -moz-appearance: textfield
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance: none
+
+.v-data-table.table-information > .v-data-table__wrapper > table > tbody > tr > td, 
+.v-data-table.table-information > .v-data-table__wrapper > table > thead > tr > td, 
+.v-data-table.table-information > .v-data-table__wrapper > table > tfoot > tr > td
+  height: 35px
+
+
+$font-sizes: 12, 14, 16, 18, 20, 22, 24, 26
+
+@each $font-size in $font-sizes 
+  .fs#{$font-size} 
+    font-size: #{$font-size}px !important
+  
+
+/* SNOTIFY */
+
+.snotify-info 
+  background-color: #282f87
+  
+  .snotifyToast__progressBar
+    background-color: #d64633
+
+  .snotifyToast__progressBar__percentage
+    background-color: #d7857a
+
+
+
+/* KENDO STEPPER */
+
+.k-stepper 
+  .k-step-list
+    .k-step
+      &.k-step-current 
+        .k-step-link
+          .k-step-indicator
+            border-color: $primary !important
+            color: white !important
+            background-color: $primary !important
+
+/* KENDO GRID */
+table
+  border-collapse: collapse
+.k-grid
+  line-height: 17px
+  //font-size: 13px
+  font-size: 0.78rem
+  font-weight: 400
+  
+  tr.k-grid-norecords
+    td
+      padding-block: 30px
+      font-size: 0.9rem
+  td
+    padding-block: 3px
+    padding-inline: 7px
+
+    .v-btn
+      &.v-btn--disabled
+        &.primary
+          background: #e57e71 !important
+          border-color: #e57e71 !important
+          
+        .white--text
+          color: #dddddd !important
+
+  .k-grid-header 
+    .k-table-th
+      border-bottom: 2px solid #c9c9c9
+
+      .k-column-resizer
+        height: 10000000000% !important
+
+        &:hover
+          color: #d2d2d2
+
+
+.k-grid-footer
+  background-color: #efefef
+
+td.td-text-break
+  white-space: nowrap !important
+  overflow: hidden !important
+  text-overflow: ellipsis !important
+
+.k-table-md
+  font-size: 0.75rem
+
+.k-grid .k-table-th, 
+.k-grid td, 
+.k-grid .k-table-td
+  border-right: 1px solid rgba(0, 0, 0, 0.12)
+  .v-chip
+    .v-chip__content
+      font-size: 0.75rem !important
+  
+.k-grid-md .k-table-th > .k-cell-inner > .k-link
+  padding-block: 5px
+
+.k-pager-numbers 
+  .k-button
+    font-size: 0.7rem
+
+.k-pager
+  .k-pager-numbers-wrap
+      .k-button
+        &.k-link
+          min-width: calc( 1.4285714286em + 12px + 2px )
+          padding-block: 5px
+          height: 30px
+          margin-top: 3px
+
+  .k-pager-sizes
+    .k-picker
+      background: white
+
+/* kendo stepper */
+.k-step-label .k-step-text
+  max-width: calc(13em - (0px + 0px)) !important
+  
+/* datepickers */
+.v-date-picker-table 
+  height: 215px
+
+  th
+    font-size: 0.8rem
+  .v-btn
+    font-size: 0.8rem
+
+/* stuff */
+.cardDetails 
+  font-size: 0.8rem
+
+  .v-btn 
+    font-size: 0.8rem !important
+

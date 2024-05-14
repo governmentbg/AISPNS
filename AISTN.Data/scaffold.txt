@@ -1,0 +1,8 @@
+﻿-- FULL DB SCAFFOLD
+
+dotnet ef dbcontext scaffold "Data Source=;Initial Catalog=; User Id=; Password=;TrustServerCertificate=Yes;" Microsoft.EntityFrameworkCore.SqlServer -o DataModel -f --no-onconfiguring --project AISTN.Data
+
+
+-- LOG DB SCAFFOLD
+
+dotnet ef dbcontext scaffold "Data Source=;Initial Catalog=; User Id=; Password=;TrustServerCertificate=Yes;" Microsoft.EntityFrameworkCore.SqlServer -o LogDataModel -f --no-onconfiguring --project AISTN.Data

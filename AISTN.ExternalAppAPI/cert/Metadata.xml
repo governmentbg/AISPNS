@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor ID="eauth-test.egov.bg"
+    entityID="https://smartsystems.bg" validUntil="2024-04-15T18:28:31.561Z"
+    xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <md:Extensions>
+        <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute"
+            xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">
+            <saml2:Attribute Name="urn:bg:egov:eauth:2.0:saml:ext"
+                NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">2.0.0</saml2:AttributeValue>
+            </saml2:Attribute>
+            <saml2:Attribute Name="http://eauth.egov.bg/attributes/citizen"
+                NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:personIdentifier</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:personName</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:email</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:phone</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:latinName</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:birthName</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:dateOfBirth</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:gender</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:placeOfBirth</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:2.0:attributes:X509</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">urn:egov:bg:eauth:1.0:attributes:canonicalResidenceAddress</saml2:AttributeValue>
+            </saml2:Attribute>
+            <saml2:Attribute Name="urn:oasis:names:tc:SAML:attribute:assurance-certification"
+                NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">LOW</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">SUBSTANTIAL</saml2:AttributeValue>
+                <saml2:AttributeValue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xsi:type="xsd:string">HIGH</saml2:AttributeValue>
+            </saml2:Attribute>
+        </mdattr:EntityAttributes>
+        <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"
+            xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" />
+        <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"
+            xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport" />
+    </md:Extensions>
+    <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+        <md:KeyDescriptor use="signing">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDATCCAemgAwIBAgIIdp8C47kHPcEwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UEBhMCQkcxEjAQBgNVBAoTCWVBdXRoVGVzdDESMBAGA1UEAxMJZUF1dGhUZXN0MB4XDTI0MDQxMDEwMTgwMFoXDTI1MDQxMDEwMTgwMFowNTELMAkGA1UEBhMCQkcxEjAQBgNVBAoTCWVBdXRoVGVzdDESMBAGA1UEAxMJZUF1dGhUZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3pWq1fPQWcUDei4z6/G1InlY1r4wXBqGyWdLKoZ+RKlzt6RE5eWAp0/4CRXe4/sK3KCwMfFvb1R+aAm5sFKRQ9nfWCd/HPi+IbZSRbAirF/BzUcUWgHqXZKj1NVEahJkYbK2ar29h8AHW4qhNRINoUGo1pK0uzAljQPUCQpm/BTv9VzKCxGHXes12uzyTRuMkhcspqh0lFuEawuQs0cbkSLGEPVon3tdtl0a6mSVDZHABN/NFngsQeFFFSKoBlV2GUIpQSo5aeDRU0n+N/Jw5Fn7y+lT3w6k0ruBav2lrb1G6VPW/2PwxlAidxTRAPWDtv8X5dfxSB/gAbgz/WqK2QIDAQABoxUwEzARBglghkgBhvhCAQEEBAMCBkAwDQYJKoZIhvcNAQELBQADggEBAKK3103EL+cFFacjn0CU2z9Is3EKrN3yVRURvKfQ3IW8L4cnxyqfrXa7jSkzJPJnV5lE7Isd1jK20yCnNLsEdrb1pjtWxoGSBxjXnJIm8el4UYfZ171r7NRIDdyD5iOLeHISViwcAqbabo7Tbjiz9C98thliRpjQfTxLFsgjI5X0giEF2TRCFObTiGw+XFMXDVWj4/D5ruW1PK8eGRisjelYq4ZdM4xp830OSklJa7AxPAJJ+H/FHIe2nFhPz40zTflmrt6qtMhWvSTksuFGMAWgaEMmSJfItACkyBGPL2BdB67IKiX8gFkkd7CmWbWgaZzoo8Jox9fg0L4xlzUnZQw=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+        <md:KeyDescriptor use="encryption">
+            <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                <ds:X509Data>
+                    <ds:X509Certificate>MIIDATCCAemgAwIBAgIIdp8C47kHPcEwDQYJKoZIhvcNAQELBQAwNTELMAkGA1UEBhMCQkcxEjAQBgNVBAoTCWVBdXRoVGVzdDESMBAGA1UEAxMJZUF1dGhUZXN0MB4XDTI0MDQxMDEwMTgwMFoXDTI1MDQxMDEwMTgwMFowNTELMAkGA1UEBhMCQkcxEjAQBgNVBAoTCWVBdXRoVGVzdDESMBAGA1UEAxMJZUF1dGhUZXN0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3pWq1fPQWcUDei4z6/G1InlY1r4wXBqGyWdLKoZ+RKlzt6RE5eWAp0/4CRXe4/sK3KCwMfFvb1R+aAm5sFKRQ9nfWCd/HPi+IbZSRbAirF/BzUcUWgHqXZKj1NVEahJkYbK2ar29h8AHW4qhNRINoUGo1pK0uzAljQPUCQpm/BTv9VzKCxGHXes12uzyTRuMkhcspqh0lFuEawuQs0cbkSLGEPVon3tdtl0a6mSVDZHABN/NFngsQeFFFSKoBlV2GUIpQSo5aeDRU0n+N/Jw5Fn7y+lT3w6k0ruBav2lrb1G6VPW/2PwxlAidxTRAPWDtv8X5dfxSB/gAbgz/WqK2QIDAQABoxUwEzARBglghkgBhvhCAQEEBAMCBkAwDQYJKoZIhvcNAQELBQADggEBAKK3103EL+cFFacjn0CU2z9Is3EKrN3yVRURvKfQ3IW8L4cnxyqfrXa7jSkzJPJnV5lE7Isd1jK20yCnNLsEdrb1pjtWxoGSBxjXnJIm8el4UYfZ171r7NRIDdyD5iOLeHISViwcAqbabo7Tbjiz9C98thliRpjQfTxLFsgjI5X0giEF2TRCFObTiGw+XFMXDVWj4/D5ruW1PK8eGRisjelYq4ZdM4xp830OSklJa7AxPAJJ+H/FHIe2nFhPz40zTflmrt6qtMhWvSTksuFGMAWgaEMmSJfItACkyBGPL2BdB67IKiX8gFkkd7CmWbWgaZzoo8Jox9fg0L4xlzUnZQw=</ds:X509Certificate>
+                </ds:X509Data>
+            </ds:KeyInfo>
+        </md:KeyDescriptor>
+    </md:SPSSODescriptor>
+    <md:Organization>
+        <md:OrganizationName xml:lang="en">MJS</md:OrganizationName>
+        <md:OrganizationDisplayName xml:lang="en">Ministry of Justice</md:OrganizationDisplayName>
+        <md:OrganizationURL xml:lang="en">https://justice.government.bg</md:OrganizationURL>
+    </md:Organization>
+    <md:ContactPerson contactType="support">
+        <md:Company>Perfect plus Ltd.</md:Company>
+        <md:GivenName>Boril</md:GivenName>
+        <md:SurName>Kolev</md:SurName>
+        <md:EmailAddress>bkolev@perfectbg.com</md:EmailAddress>
+    </md:ContactPerson>
+    <md:ContactPerson contactType="technical">
+        <md:Company>Perfect plus Ltd.</md:Company>
+        <md:GivenName>Boril</md:GivenName>
+        <md:SurName>Kolev</md:SurName>
+        <md:EmailAddress>bkolev@perfectbg.com</md:EmailAddress>
+    </md:ContactPerson>
+</md:EntityDescriptor>

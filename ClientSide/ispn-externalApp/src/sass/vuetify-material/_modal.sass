@@ -1,0 +1,45 @@
+@import '../../../node_modules/vuetify/src/styles/styles'
+  
+.v-dialog
+  .v-card
+    margin: 0
+    .v-card__title
+      font-weight: 300
+      font-size: 25px !important
+      display: inline-block
+      text-align: left
+      font-weight: bold
+      color: #3c3c3c
+      width: 100%
+      padding: 24px 24px 20px
+      box-shadow: 0 -4px 24px -12px rgb(70 6 19 / 0.56), 0 4px 46px 0 rgb(70 6 19 / 0), 0 8px 17px -5px rgb(59 109 41 / 0.10)
+      margin-bottom: 15px
+
+      .v-icon
+        position: absolute
+        top: 15px
+        right: 20px
+        color: #999
+        opacity: .5
+        font-size: 16px
+        &:hover
+          opacity: 1
+
+.theme--dark
+  .v-dialog
+    .v-card
+      .v-card__title
+        color: rgba(255, 255, 255, 0.7)
+
+.v-dialog > .v-card > .v-card__text
+  padding-top: 24px
+  padding-bottom: 24px
+  font-weight: 300
+  line-height: 1.75em
+  letter-spacing: 0
+  font-size: 18px
+  font-weight: 400
+
+  .v-avatar
+    h3
+      color: white

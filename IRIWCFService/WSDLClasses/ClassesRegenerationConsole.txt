@@ -1,0 +1,4 @@
+﻿
+# navigate to the dir of IRIQuery.wsdl
+
+ dotnet-svcutil .\IRIQuery.wsdl -mc 

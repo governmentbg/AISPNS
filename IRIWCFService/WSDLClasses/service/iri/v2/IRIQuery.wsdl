@@ -1,0 +1,173 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/service/iri/v2" xmlns:itf="http://e-justice.europa.eu/interface/iri/v2" xmlns:gen="http://e-justice.europa.eu/model/common/v2" xmlns:gquery="http://e-justice.europa.eu/model/generic-query/v2" xmlns:fault="http://e-justice.europa.eu/model/service-fault/v2" xmlns:ns="http://e-justice.europa.eu/model/iri/v2" xmlns:ns1="http://e-justice.europa.eu/service/iri/v2" name="IRIQueryService" targetNamespace="http://e-justice.europa.eu/service/iri/v2">
+	<wsdl:types>
+		<xs:schema>
+			<xs:import namespace="http://e-justice.europa.eu/interface/iri/v2" schemaLocation="IIRIQuery.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="initIRIQueryRequest">
+		<wsdl:part name="param" element="itf:initIRIQueryRequest"/>
+	</wsdl:message>
+	<wsdl:message name="initIRIQueryResponse">
+		<wsdl:part name="param" element="itf:initIRIQueryResponse"/>
+	</wsdl:message>
+	<wsdl:message name="simpleSearchRequest">
+		<wsdl:part name="param" element="itf:simpleSearchRequest"/>
+	</wsdl:message>
+	<wsdl:message name="simpleSearchResponse">
+		<wsdl:part name="param" element="itf:simpleSearchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="advancedSearchRequest">
+		<wsdl:part name="param" element="itf:advancedSearchRequest"/>
+	</wsdl:message>
+	<wsdl:message name="advancedSearchResponse">
+		<wsdl:part name="param" element="itf:advancedSearchResponse"/>
+	</wsdl:message>
+	<wsdl:message name="advancedSearchPersonRequest">
+		<wsdl:part name="param" element="itf:advancedSearchPersonRequest"/>
+	</wsdl:message>
+	<wsdl:message name="advancedSearchPersonResponse">
+		<wsdl:part name="param" element="itf:advancedSearchPersonResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getDataRecordRequest">
+		<wsdl:part name="param" element="itf:getDataRecordRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getDataRecordResponse">
+		<wsdl:part name="param" element="itf:getDataRecordResponse"/>
+	</wsdl:message>
+	<wsdl:message name="submitRequestFormRequest">
+		<wsdl:part name="param" element="itf:submitRequestFormRequest"/>
+	</wsdl:message>
+	<wsdl:message name="submitRequestFormResponse">
+		<wsdl:part name="param" element="itf:submitRequestFormResponse"/>
+	</wsdl:message>
+	<wsdl:message name="InternalServiceException">
+		<wsdl:part name="fault" element="itf:InternalServiceException"/>
+	</wsdl:message>
+	<wsdl:message name="NotImplementedException">
+		<wsdl:part name="fault" element="itf:NotImplementedException"/>
+	</wsdl:message>
+	<wsdl:portType name="IRIQueryService">
+		<wsdl:operation name="initIRIQuery">
+			<wsdl:input name="initIRIQueryRequest" message="initIRIQueryRequest"/>
+			<wsdl:output name="initIRIQueryResponse" message="initIRIQueryResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="simpleSearch">
+			<wsdl:input name="simpleSearchRequest" message="simpleSearchRequest"/>
+			<wsdl:output name="simpleSearchResponse" message="simpleSearchResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="advancedSearch">
+			<wsdl:input name="advancedSearchRequest" message="advancedSearchRequest"/>
+			<wsdl:output name="advancedSearchResponse" message="advancedSearchResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+			<wsdl:fault name="NotImplementedException" message="NotImplementedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="advancedSearchPerson">
+			<wsdl:input name="advancedSearchPersonRequest" message="advancedSearchPersonRequest"/>
+			<wsdl:output name="advancedSearchPersonResponse" message="advancedSearchPersonResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+			<wsdl:fault name="NotImplementedException" message="NotImplementedException"/>
+		</wsdl:operation>
+		<wsdl:operation name="getDataRecord">
+			<wsdl:input name="getDataRecordRequest" message="getDataRecordRequest"/>
+			<wsdl:output name="getDataRecordResponse" message="getDataRecordResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+		</wsdl:operation>
+		<wsdl:operation name="submitRequestForm">
+			<wsdl:input name="submitRequestFormRequest" message="submitRequestFormRequest"/>
+			<wsdl:output name="submitRequestFormResponse" message="submitRequestFormResponse"/>
+			<wsdl:fault name="InternalServiceException" message="InternalServiceException"/>
+			<wsdl:fault name="NotImplementedException" message="NotImplementedException"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="IRIQueryServiceSoapBinding" type="IRIQueryService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="initIRIQuery">
+			<soap:operation soapAction="urn:IRIQueryService:1:initIRIQuery"/>
+			<wsdl:input name="initIRIQueryRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="initIRIQueryResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="simpleSearch">
+			<soap:operation soapAction="urn:IRIQueryService:1:simpleSearch"/>
+			<wsdl:input name="simpleSearchRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="simpleSearchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="advancedSearch">
+			<soap:operation soapAction="urn:IRIQueryService:1:advancedSearch"/>
+			<wsdl:input name="advancedSearchRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="advancedSearchResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="NotImplementedException">
+				<soap:fault name="NotImplementedException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="advancedSearchPerson">
+			<soap:operation soapAction="urn:IRIQueryService:1:advancedSearchPerson"/>
+			<wsdl:input name="advancedSearchPersonRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="advancedSearchPersonResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="NotImplementedException">
+				<soap:fault name="NotImplementedException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getDataRecord">
+			<soap:operation soapAction="urn:IRIQueryService:1:getDataRecord"/>
+			<wsdl:input name="getDataRecordRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="getDataRecordResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="submitRequestForm">
+			<soap:operation soapAction="urn:IRIQueryService:1:submitRequestForm"/>
+			<wsdl:input name="submitRequestFormRequest">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="submitRequestFormResponse">
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="InternalServiceException">
+				<soap:fault name="InternalServiceException" use="literal"/>
+			</wsdl:fault>
+			<wsdl:fault name="NotImplementedException">
+				<soap:fault name="NotImplementedException" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="IRIQueryService">
+		<wsdl:port name="IRIQueryService" binding="IRIQueryServiceSoapBinding">
+			<soap:address location="http://e-justice.europa.eu/iri/IRIQueryService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

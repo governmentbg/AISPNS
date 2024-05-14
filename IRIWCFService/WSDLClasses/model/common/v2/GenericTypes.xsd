@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/model/common/v2" xmlns:ns1="http://e-justice.europa.eu/model/common/v2" targetNamespace="http://e-justice.europa.eu/model/common/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">A schema for the definition of basic data types and generic concepts that can be re-used in other schemas
+			=== HISTORY===
+	1.00 - first release of the schema to the Member States
+	1.01 - Add URL Type
+	2.00 - Add Address, Add optional language and fee on URL
+	2.04 - Change Reference Type restriction base from xsd:NMTOKEN to xsd:token</xsd:documentation>
+	</xsd:annotation>
+	<xsd:simpleType name="Reference">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of a value used as Reference</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BasicAmount">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of an Amount with 2 fraction digits</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="15"/>
+			<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Currency">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of a Currency Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:length value="3"/>
+			<xsd:pattern value="[A-Z]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Country">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of a Country Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:length value="2"/>
+			<xsd:pattern value="[A-Z]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Language">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of a Language Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:NMTOKEN">
+			<xsd:length value="2"/>
+			<xsd:pattern value="[a-z]*"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="BasicURL">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of an URL with a possible user-friendly label</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="label" type="xsd:string"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="URL">
+		<xsd:annotation>
+			<xsd:documentation>Extended representation of a URL with possible language and fee</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="BasicURL">
+				<xsd:attribute name="lang" type="Language"/>
+				<xsd:attribute name="fee" type="BasicAmount"/>
+				<xsd:attribute name="currency" type="Currency"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Attachment">
+		<xsd:annotation>
+			<xsd:documentation>A binary with its mime type and file name</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:base64Binary">
+				<xsd:attribute name="mimeType" type="xsd:string" use="required"/>
+				<xsd:attribute name="fileName" type="xsd:string" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Amount">
+		<xsd:annotation>
+			<xsd:documentation>An Amount with its possible currency</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="BasicAmount">
+				<xsd:attribute name="currency" type="Currency" default="EUR"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="Period">
+		<xsd:annotation>
+			<xsd:documentation>Generic representation of a Period of time begining with a start date and ending with an end date</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="startDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="endDate" type="xsd:date" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BasicAddress">
+		<xsd:annotation>
+			<xsd:documentation>Address at city level</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="city" type="xsd:string"/>
+			<xsd:element name="zip" type="xsd:token" minOccurs="0"/>
+			<xsd:element name="countryCode" type="Reference"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Address">
+		<xsd:annotation>
+			<xsd:documentation>Address incluing the street, street number, PO Box; if any</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="BasicAddress">
+				<xsd:sequence>
+					<xsd:element name="street" type="xsd:string" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="Name">
+		<xsd:annotation>
+			<xsd:documentation>Name of a natural person</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="givenName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="surname" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BirthInformation">
+		<xsd:annotation>
+			<xsd:documentation>Information on birth data/place of a natural person</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="date" type="xsd:date"/>
+			<xsd:element name="place" type="xsd:string"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BasicContactInformation">
+		<xsd:sequence>
+			<xsd:element name="email" type="Reference" minOccurs="0"/>
+			<xsd:element name="faxNumber" type="Reference" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QualifiedText">
+		<xsd:annotation>
+			<xsd:documentation>A Textual value with its language</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="lang" type="xsd:language" use="required"/>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="ReferenceData">
+		<xsd:annotation>
+			<xsd:documentation>A Qualified Text with a code permitting to defining it as a predefined value</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="description" type="QualifiedText" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="key" type="Reference" use="required"/>
+		<xsd:attribute name="translatable" type="xsd:boolean" use="optional" default="true"/>
+	</xsd:complexType>
+	<xsd:complexType name="BasicContext">
+		<xsd:annotation>
+			<xsd:documentation>Context of the execution of a basic operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="status">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:token">
+						<xsd:enumeration value="OK"/>
+						<xsd:enumeration value="ERROR"/>
+						<xsd:enumeration value="WARNING"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="remark" type="Remark" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ResultContext">
+		<xsd:annotation>
+			<xsd:documentation>A Generic representation of Context of execution of a business operation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="BasicContext">
+				<xsd:sequence>
+					<xsd:element name="businessRef" minOccurs="0">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="AbstractReference"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:element name="AbstractReference" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>Abstract definition of any Kind of Reference usable for referencing an Entity. Concrete definition has to be provided for each kind of concrete entities in the XSD Defining the Interface</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="Remark">
+		<xsd:annotation>
+			<xsd:documentation>Element describing an Error or Warning</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="detail" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="code" type="xsd:token" use="required"/>
+		<xsd:attribute name="xpath" type="xsd:string"/>
+	</xsd:complexType>
+</xsd:schema>

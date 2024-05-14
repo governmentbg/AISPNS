@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+		   elementFormDefault="qualified"
+		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		   xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"
+		   xmlns:crd="http://www.registryagency.bg/schemas/deedv2"
+       xmlns:crn="http://www.registryagency.bg/schemas/comreg/notifications/v1"
+		   targetNamespace="http://www.registryagency.bg/schemas/envelopev2"
+		   xmlns="http://www.registryagency.bg/schemas/envelopev2">
+  <xs:import namespace="http://www.registryagency.bg/schemas/deedv2"
+			   schemaLocation="DeedV2.xsd"></xs:import>
+  <xs:import namespace="http://www.registryagency.bg/schemas/comreg/notifications/v1"
+       schemaLocation="Notifications.xsd"></xs:import>
+  <!--<xs:import namespace="http://www.w3.org/2000/09/xmldsig#"
+			   schemaLocation="http://www.w3.org/TR/2002/REC-xmldsig-core-20020212/xmldsig-core-schema.xsd"></xs:import>
+  -->
+  <xs:element name="Message" type="MessageType">
+  </xs:element>
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element name="Header" type="HeaderType" maxOccurs="1" minOccurs="1">
+      </xs:element>
+      <xs:element name="Body" type="BodyType" maxOccurs="1" minOccurs="1">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HeaderType">
+    <xs:all>
+      <xs:element name="MessageDetails" type="MessageDetailsType" maxOccurs="1" minOccurs="1">
+      </xs:element>
+      <xs:element name="SenderDetails" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Name" type="xs:string" maxOccurs="1" />
+            <xs:element name="Uri" type="xs:string" maxOccurs="1" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TargetDetails" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Name" type="xs:string" />
+            <xs:element name="Uri" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Errors" maxOccurs="1" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Error" type="ErrorType" maxOccurs="unbounded" minOccurs="1">
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Status" type="StatusType">
+        <!--<xs:element ref="dsig:Signature" />-->
+      </xs:element>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BodyType">
+    <xs:sequence>
+      <xs:element name="Notifications" minOccurs="0" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="crn:NotificationInfo" minOccurs="1" maxOccurs="unbounded"></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Deeds" minOccurs="1" maxOccurs="1">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="crd:Deed" minOccurs="0" maxOccurs="unbounded"></xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SearchCriteria" type="SearchCriteria" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="MessageDetailsType">
+    <xs:sequence>
+      <xs:element name="CreateDate" type="xs:dateTime" maxOccurs="1" minOccurs="0" />
+      <xs:element name="Creator" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="ID" type="xs:string" maxOccurs="1" minOccurs="1" />
+      <xs:element name="Reason" type="MessageReasonType" maxOccurs="1">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ErrorType">
+    <xs:all>
+      <xs:element name="RaisedBy" type="xs:string" maxOccurs="1" minOccurs="0" />
+      <xs:element name="Number" type="xs:int" maxOccurs="1" minOccurs="0" />
+      <xs:element name="Type" maxOccurs="1" minOccurs="1">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="fatal" />
+            <xs:enumeration value="recoverable" />
+            <xs:enumeration value="business" />
+            <xs:enumeration value="warning" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Location" type="xs:string" maxOccurs="1" minOccurs="0" />
+      <xs:element name="Text" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:simpleType name="StatusType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OK" />
+      <xs:enumeration value="Error" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MessageReasonType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Notification" />
+      <xs:enumeration value="Response" />
+      <!-- zasto nqma Search -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SearchForDeedsType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SearchForNewOrganization" />
+      <xs:enumeration value="SearchForReRegisterOrganization" />
+      <xs:enumeration value="SearchForNewChanges" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="ArrayOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfLong">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="long" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SearchCriteriaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SearchByUic" />
+      <xs:enumeration value="SeatchForRights" />
+      <xs:enumeration value="SearchForDeeds" />
+      <xs:enumeration value="SearchByUicsAtDate" />
+      <xs:enumeration value="SearchByDate" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="SearchCriteria">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="SearchType" type="SearchCriteriaType" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Uic" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompanyName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="FieldIdentities" type="ArrayOfString" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SearchInHistory" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DeedStatus" nillable="true" type="crd:DeedStatusType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="SearchForDeedsType" nillable="true" type="SearchForDeedsType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="LegalForm" nillable="true" type="crd:LegalFormType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LoadPackageDocuments" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

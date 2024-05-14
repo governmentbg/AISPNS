@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions targetNamespace="urn:DefaultNamespace" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:DefaultNamespace" xmlns:intf="urn:DefaultNamespace" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <wsdl:types>
+  <schema targetNamespace="urn:DefaultNamespace" xmlns="http://www.w3.org/2001/XMLSchema">
+   <simpleType name="RESPONSETYPE">
+    <restriction base="xsd:int">
+     <enumeration value="0"/>
+     <enumeration value="1"/>
+     <enumeration value="10"/>
+     <enumeration value="11"/>
+    </restriction>
+   </simpleType>
+   <complexType name="ERRORCLASS">
+    <sequence>
+     <element name="ID" type="xsd:int"/>
+     <element name="DESCRIPTION" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="SESSION">
+    <sequence>
+     <element name="ID" type="xsd:string"/>
+     <element name="USERNAME" type="xsd:string"/>
+     <element name="TTL" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ISPNSIDE">
+    <sequence>
+     <element name="NAME" type="xsd:string"/>
+     <element name="ISPERSON" type="xsd:boolean"/>
+     <element name="STATENUMBER" type="xsd:string"/>
+     <element name="INVOLVEMENT" type="xsd:int"/>
+     <element name="INVOLVEMENTTEXT" type="xsd:string"/>
+     <element name="LASTUPDATE" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="ISPNCASE">
+    <sequence>
+     <element name="NUMBER" type="xsd:int"/>
+     <element name="YEAR" type="xsd:int"/>
+     <element name="DATE" nillable="true" type="xsd:dateTime"/>
+     <element name="COURT" type="xsd:string"/>
+     <element name="COURTNAME" type="xsd:string"/>
+     <element name="LASTUPDATE" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="RESULT">
+    <sequence>
+     <element name="SIDE" nillable="true" type="impl:ISPNSIDE"/>
+     <element name="CASE" nillable="true" type="impl:ISPNCASE"/>
+     <element name="LASTUPDATE" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="RESULTSET">
+    <sequence>
+     <element name="COUNT" type="xsd:int"/>
+     <element name="RESULTSCOUNT" type="xsd:int"/>
+     <element maxOccurs="unbounded" minOccurs="0" name="RESULTS" nillable="true" type="impl:RESULT"/>
+     <element name="LASTID" type="xsd:string"/>
+     <element name="LASTUPDATE" nillable="true" type="xsd:dateTime"/>
+    </sequence>
+   </complexType>
+   <complexType name="RESPONSE">
+    <sequence>
+     <element name="TYPE" nillable="true" type="impl:RESPONSETYPE"/>
+     <element name="ERROR" nillable="true" type="impl:ERRORCLASS"/>
+     <element name="SESSION" nillable="true" type="impl:SESSION"/>
+     <element name="RESULTSET" nillable="true" type="impl:RESULTSET"/>
+     <element name="NUMBER" type="xsd:double"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+ <message name="LOGINRequest">
+  <part name="USER" type="xsd:string"/>
+  <part name="PASS" type="xsd:string"/>
+ </message>
+ <message name="QUERYRequest">
+  <part name="SESSIONID" type="xsd:string"/>
+  <part name="STATENUMBER" type="xsd:string"/>
+  <part name="INVOLVEMENT" type="xsd:int"/>
+  <part name="STARTID" type="xsd:string"/>
+ </message>
+ <message name="QUERYResponse">
+  <part name="QUERYReturn" type="impl:RESPONSE"/>
+ </message>
+ <message name="PLUSResponse">
+  <part name="PLUSReturn" type="impl:RESPONSE"/>
+ </message>
+ <message name="PLUSRequest">
+  <part name="SESSIONID" type="xsd:string"/>
+  <part name="X" type="xsd:double"/>
+  <part name="Y" type="xsd:double"/>
+ </message>
+ <message name="LOGINResponse">
+  <part name="LOGINReturn" type="impl:RESPONSE"/>
+ </message>
+ <portType name="ispn">
+  <operation name="PLUS" parameterOrder="SESSIONID X Y">
+   <input message="impl:PLUSRequest" name="PLUSRequest"/>
+   <output message="impl:PLUSResponse" name="PLUSResponse"/>
+  </operation>
+  <operation name="LOGIN" parameterOrder="USER PASS">
+   <input message="impl:LOGINRequest" name="LOGINRequest"/>
+   <output message="impl:LOGINResponse" name="LOGINResponse"/>
+  </operation>
+  <operation name="QUERY" parameterOrder="SESSIONID STATENUMBER INVOLVEMENT STARTID">
+   <input message="impl:QUERYRequest" name="QUERYRequest"/>
+   <output message="impl:QUERYResponse" name="QUERYResponse"/>
+  </operation>
+ </portType>
+ <binding name="DominoSoapBinding" type="impl:ispn">
+  <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="PLUS">
+   <wsdlsoap:operation soapAction="PLUS"/>
+   <input name="PLUSRequest">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </input>
+   <output name="PLUSResponse">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </output>
+  </operation>
+  <operation name="LOGIN">
+   <wsdlsoap:operation soapAction="LOGIN"/>
+   <input name="LOGINRequest">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </input>
+   <output name="LOGINResponse">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </output>
+  </operation>
+  <operation name="QUERY">
+   <wsdlsoap:operation soapAction="QUERY"/>
+   <input name="QUERYRequest">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </input>
+   <output name="QUERYResponse">
+    <wsdlsoap:body namespace="urn:DefaultNamespace" use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="ispnService">
+  <port binding="impl:DominoSoapBinding" name="Domino">
+   <wsdlsoap:address location="http://localhost"/>
+  </port>
+ </service>
+</definitions>
