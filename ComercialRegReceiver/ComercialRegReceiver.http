@@ -1,0 +1,6 @@
+@ComercialRegReceiver_HostAddress = http://localhost:5241
+
+GET {{ComercialRegReceiver_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

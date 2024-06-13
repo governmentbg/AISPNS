@@ -1,0 +1,6 @@
+@AISTN.ExternalAppAPI_HostAddress = http://localhost:5212
+
+GET {{AISTN.ExternalAppAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

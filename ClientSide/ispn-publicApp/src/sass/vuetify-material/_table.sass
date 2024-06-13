@@ -1,0 +1,155 @@
+.v-data-table td
+  font-weight: 300
+  padding: 12px 8px
+
+.v-data-table table thead tr th
+  font-weight: 500
+  font-size: 16px !important
+  padding: 0px 8px !important
+
+  i 
+    margin-left: 2px
+  
+
+.v-data-table table tbody tr td
+  padding: 0px 8px !important
+  font-size: 13.5px !important
+
+.v-data-table table tbody tr td .v-btn
+  margin-right: 0px !important
+
+.v-data-table .v-data-table-header__sort-badge
+  font-size: 10px
+
+.v-data-table.theme--dark
+  tr th
+    color: #fff !important
+
+.theme--light
+  .v-data-table table thead tr th
+    color: #333
+
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th
+  border-bottom: 1px solid #919191 !important
+
+
+.v-data-table > .v-data-table__wrapper > table > tbody > tr > th, 
+.v-data-table > .v-data-table__wrapper > table > thead > tr > th, 
+.v-data-table > .v-data-table__wrapper > table > tfoot > tr > th
+  font-size: 1rem
+
+// .v-data-table.nowrap td:first-child
+//   white-space: nowrap
+
+.v-data-table
+  &.bordered
+    table
+      border-collapse: collapse
+
+      td
+        //border: 1px solid #d1d1d1 !important
+        border: 1px solid #919191 !important
+
+      th
+        //border: 1px solid #d1d1d1 !important
+        border: 1px solid #919191 !important
+
+
+.v-data-table
+  &.theme--light
+    &.disabled
+      table
+        border-collapse: collapse
+        thead
+          tr 
+            th, td
+              border: 1px solid #e7e7e7 !important
+              color: #d9d9d9 !important
+              border-bottom: 1px solid #e7e7e7 !important
+              background: transparent
+              i
+                color: #d9d9d9 !important
+
+        tbody
+          tr
+            &:hover
+              background: transparent !important
+              td
+                background: white
+
+            td
+              border: 1px solid #e7e7e7 !important
+              color: #d9d9d9 !important
+              background: transparent
+
+          th
+            border: 1px solid #e7e7e7 !important
+            color: #d9d9d9 !important
+
+            &:hover
+              //background: transparent !important
+              background: transparent
+
+          tr
+            &.ispnTableHeadline
+              &:hover
+                td
+                  &:hover
+                    background: #ebebeb !important
+
+              td
+                background: #ebebeb !important
+                color: black !important
+                color: #c1c0c0 !important
+                font-weight: 500
+
+          tr
+            &.declarationTableTotals
+              th
+                font-size: 15px !important
+                background-color: #d7d7d7
+                color: #a9a9a9 !important
+
+
+.v-data-table
+  &.theme--dark
+    &.disabled
+      table
+        border-collapse: collapse
+        thead
+          tr 
+            th
+              border-bottom: 1px solid #444444 !important
+
+        tr
+          &:hover
+            //background: transparent !important
+            background: transparent
+            td
+              background: #1E1E1E
+
+        td
+          border: 1px solid #444444 !important
+          color: #444444 !important
+          &:hover
+            //background: transparent !important
+            background: transparent
+        th
+          border: 1px solid #444444 !important
+          color: #444444 !important
+          &:hover
+            //background: transparent !important
+            background: transparent
+
+        tr
+          &.ispnTableHeadline
+            &:hover
+              td
+                &:hover
+                  background: #303030 !important
+
+            td
+              background: #303030 !important
+              color: black !important
+              color: #c1c0c0 !important
+              font-weight: 500

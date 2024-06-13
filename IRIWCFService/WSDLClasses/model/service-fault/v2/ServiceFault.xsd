@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/model/service-fault/v2" targetNamespace="http://e-justice.europa.eu/model/service-fault/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">A schema for the definition of exceptions
+			=== HISTORY===
+	1.00 - first release of the schema to the Member States
+	1.01 - Confirm the type of 'id'</xsd:documentation>
+	</xsd:annotation>
+	<xsd:complexType name="GenericException">
+		<xsd:sequence>
+			<xsd:element name="errorMessage" type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:NMTOKEN"/>
+	</xsd:complexType>
+	<xsd:complexType name="InternalServiceException">
+		<xsd:complexContent>
+			<xsd:extension base="GenericException"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="NotImplementedException">
+		<xsd:complexContent>
+			<xsd:extension base="GenericException"/>
+		</xsd:complexContent>
+	</xsd:complexType>
+</xsd:schema>

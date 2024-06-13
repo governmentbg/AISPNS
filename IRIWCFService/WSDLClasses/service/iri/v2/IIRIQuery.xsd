@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/interface/iri/v2" xmlns:fault="http://e-justice.europa.eu/model/service-fault/v2" xmlns:gquery="http://e-justice.europa.eu/model/generic-query/v2" xmlns:gen="http://e-justice.europa.eu/model/common/v2" xmlns:iri="http://e-justice.europa.eu/model/iri/v2" xmlns:xml="http://www.w3.org/XML/1998/namespace" targetNamespace="http://e-justice.europa.eu/interface/iri/v2" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:gen="http://e-justice.europa.eu/model/common/v2">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">A schema for the definition of the interface defining IRI operations
+			=== HISTORY===
+	2.00 - first release of the schema to the Member States
+	    </xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://e-justice.europa.eu/model/service-fault/v2" schemaLocation="../../../model/service-fault/v2/ServiceFault.xsd"/>
+	<xsd:import namespace="http://e-justice.europa.eu/model/common/v2" schemaLocation="../../../model/common/v2/GenericTypes.xsd"/>
+	<xsd:import namespace="http://e-justice.europa.eu/model/generic-query/v2" schemaLocation="../../../model/generic-query/v2/GenericQuery.xsd"/>
+	<xsd:import namespace="http://e-justice.europa.eu/model/iri/v2" schemaLocation="../../../model/iri/v2/IRI.xsd"/>
+	<!-- Complex Types -->
+	<xsd:element name="nationalId" type="gen:Reference" substitutionGroup="gen:AbstractReference"/>
+	<xsd:complexType name="IRISearchResult">
+		<xsd:sequence>
+			<xsd:group ref="gquery:UserInfoGroup"/>
+			<xsd:element name="resultTable" type="gquery:ValueTable" minOccurs="0"/>
+			<xsd:element name="context" type="gen:BasicContext"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="IRIDetailedResult">
+		<xsd:sequence>
+			<xsd:group ref="gquery:UserInfoGroup"/>
+			<xsd:element name="entity" type="iri:InsolvencyRecord" minOccurs="0"/>
+			<xsd:element name="context" type="gen:BasicContext"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!-- Init Generic Query -->
+	<xsd:element name="initIRIQueryRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of initIRIQuery</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="initIRIQueryResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response message of initIRIQuery</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="field" type="gquery:FieldRenderingInfo" maxOccurs="unbounded"/>
+				<xsd:element name="section" type="gquery:SectionRenderingInfo" minOccurs="0" maxOccurs="unbounded"/>
+				<xsd:element name="advancedQuery" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:group ref="gquery:UserInfoGroup"/>
+							<xsd:element name="criteriaGroup" type="gquery:CriteriaGroup" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="advanceQueryPerson" minOccurs="0">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:group ref="gquery:UserInfoGroup"/>
+							<xsd:element name="criteriaGroup" type="gquery:CriteriaGroup" maxOccurs="unbounded"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="context" type="gen:BasicContext"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- Simple Search -->
+	<xsd:element name="simpleSearchRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of simpleSearch</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="nationalId" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="maxResult" type="xsd:positiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="simpleSearchResponse" type="IRISearchResult">
+		<xsd:annotation>
+			<xsd:documentation>Response message of simpleSearch</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Advanced Search for Legal Person -->
+	<xsd:element name="advancedSearchRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of advancedSearch</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="nationalId" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="criterion" type="gquery:CivilJusticeSearchDataElement" maxOccurs="unbounded"/>
+				<xsd:element name="maxResult" type="xsd:positiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="advancedSearchResponse" type="IRISearchResult">
+		<xsd:annotation>
+			<xsd:documentation>Response message of advancedSearch</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Advanced Search for Natural Person -->
+	<xsd:element name="advancedSearchPersonRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of advancedSearchPerson</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="name" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="nationalId" type="xsd:string" minOccurs="0"/>
+				<xsd:element name="criterion" type="gquery:CivilJusticeSearchDataElement" maxOccurs="unbounded"/>
+				<xsd:element name="maxResult" type="xsd:positiveInteger" minOccurs="0"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="advancedSearchPersonResponse" type="IRISearchResult">
+		<xsd:annotation>
+			<xsd:documentation>Response message of advancedSearchPerson</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Get Details -->
+	<xsd:element name="getDataRecordRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of getDataRecord</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="nationalID" type="gen:Reference"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="getDataRecordResponse" type="IRIDetailedResult">
+		<xsd:annotation>
+			<xsd:documentation>Response message of getDataRecord</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<!-- Resquest upon Verification -->
+	<xsd:element name="submitRequestFormRequest">
+		<xsd:annotation>
+			<xsd:documentation>Request message of submitRequestForm</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="requestForm" type="iri:RequestForm"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<xsd:element name="submitRequestFormResponse">
+		<xsd:annotation>
+			<xsd:documentation>Response message of submitRequestForm</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="context" type="gen:BasicContext"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	<!-- Exceptions -->
+	<xsd:element name="InternalServiceException" type="fault:InternalServiceException">
+		<xsd:annotation>
+			<xsd:documentation>Message corresponding to InternalServiceException</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="NotImplementedException" type="fault:NotImplementedException">
+		<xsd:annotation>
+			<xsd:documentation>Message corresponding to NotImeplementException</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+</xsd:schema>

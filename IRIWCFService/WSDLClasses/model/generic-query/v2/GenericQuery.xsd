@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/model/generic-query/v2" xmlns:gen="http://e-justice.europa.eu/model/common/v2" targetNamespace="http://e-justice.europa.eu/model/generic-query/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">A schema for the definition of entities involved in Generic Query operations
+			=== HISTORY===
+	1.00 - first release of the schema to the Member States
+	1.01 - Add URL as Simple Type and possibility to have null for simple values
+	1.02 - Redefine SimpleValue and ComplexValue to simplify the definition
+	1.03 - Add possibility to have specific formating on list of values
+	1.04 - Possibility to have null value for SimpleValue and ComplexValue
+	1.05 - Hierarchy between Fields used in complex query and linked dropdown lists
+	1.06 - Add possibility to define way how to order a list of values
+	2.00 - Add optional fee on URL
+	2.06 - Remove nillable attribute from SimpleValue
+
+	</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://e-justice.europa.eu/model/common/v2" schemaLocation="../../common/v2/GenericTypes.xsd"/>
+	<xsd:group name="UserInfoGroup">
+		<xsd:sequence>
+			<xsd:element name="info" type="gen:ReferenceData" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:group>
+	<xsd:complexType name="ItemReference">
+		<xsd:attribute name="key" type="gen:Reference" use="required"/>
+	</xsd:complexType>
+	<xsd:complexType name="FieldConstraint">
+		<xsd:annotation>
+			<xsd:documentation>Constraints that can be applied on an editable field (i.e. queryable field)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="predefinedValue" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="gen:ReferenceData">
+							<xsd:attribute name="masterValueKey" type="gen:Reference"/>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="basicConstraints" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="minLength" type="xsd:positiveInteger" minOccurs="0"/>
+						<xsd:element name="maxLength" type="xsd:positiveInteger" minOccurs="0"/>
+						<xsd:element name="minValue" type="SimpleValue" minOccurs="0"/>
+						<xsd:element name="maxValue" type="SimpleValue" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:choice>
+		<xsd:attribute name="inputMode" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="SIMPLE"/>
+					<xsd:enumeration value="MULTIPLE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="inputControl">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="CHECKBOX"/>
+					<xsd:enumeration value="DROPDOWN"/>
+					<xsd:enumeration value="LISTBOX"/>
+					<xsd:enumeration value="RADIOBUTTON"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+		<xsd:attribute name="mandatory" type="xsd:boolean" default="false"/>
+		<xsd:attribute name="defaultKey" type="gen:Reference"/>
+		<xsd:attribute name="masterFieldKey" type="gen:Reference"/>
+	</xsd:complexType>
+	<xsd:complexType name="FieldRenderingInfo">
+		<xsd:annotation>
+			<xsd:documentation>Provide information about a field (type, constraints if it is editable, layout options)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="description" type="gen:QualifiedText" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="constraints" type="FieldConstraint" minOccurs="0"/>
+			<xsd:element name="layoutOptions" minOccurs="0">
+				<xsd:complexType>
+					<xsd:attribute name="bold" type="xsd:boolean" default="false"/>
+					<xsd:attribute name="italic" type="xsd:boolean" default="false"/>
+					<xsd:attribute name="direction">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:enumeration value="HORIZONTAL"/>
+								<xsd:enumeration value="VERTICAL"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+					<xsd:attribute name="orderMode" default="ALPHABETICAL">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:NMTOKEN">
+								<xsd:pattern value="ALPHABETICAL"/>
+								<xsd:pattern value="NATURAL"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="key" type="gen:Reference" use="required"/>
+		<xsd:attribute name="type" use="required">
+			<xsd:simpleType>
+				<xsd:restriction base="xsd:NMTOKEN">
+					<xsd:enumeration value="ID"/>
+					<xsd:enumeration value="BOOLEAN"/>
+					<xsd:enumeration value="NUMBER"/>
+					<xsd:enumeration value="TEXT"/>
+					<xsd:enumeration value="LOV"/>
+					<xsd:enumeration value="DATE"/>
+					<xsd:enumeration value="TIME"/>
+					<xsd:enumeration value="DATETIME"/>
+					<xsd:enumeration value="PERIOD"/>
+					<xsd:enumeration value="AMOUNT"/>
+					<xsd:enumeration value="URL"/>
+					<xsd:enumeration value="LIST"/>
+					<xsd:enumeration value="TABLE"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="SectionRenderingInfo">
+		<xsd:annotation>
+			<xsd:documentation>Provide information about a section</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ItemReference">
+				<xsd:sequence>
+					<xsd:element name="description" type="gen:QualifiedText" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="SimpleValue">
+		<xsd:annotation>
+			<xsd:documentation>Represent a value taking the form of one of the basic types</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="boolean" type="xsd:boolean"/>
+			<xsd:element name="number" type="xsd:long"/>
+			<xsd:element name="text" type="xsd:string"/>
+			<xsd:element name="refData" type="gen:ReferenceData"/>
+			<xsd:element name="date" type="xsd:date"/>
+			<xsd:element name="time" type="xsd:time"/>
+			<xsd:element name="dateTime" type="xsd:dateTime"/>
+			<xsd:element name="period" type="gen:Period"/>
+			<xsd:element name="amount" type="gen:Amount"/>
+			<xsd:element name="url" type="gen:URL"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="ValueList">
+		<xsd:annotation>
+			<xsd:documentation>Represent a list of values (limited to basic types). The optional element 'format' permits to provide a rendering ID to be used for formatting the values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="format" type="gen:ReferenceData" minOccurs="0"/>
+			<xsd:element name="value" type="SimpleValue" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ValueTable">
+		<xsd:annotation>
+			<xsd:documentation>Represent a table of values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="header" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="column" maxOccurs="unbounded">
+							<xsd:complexType>
+								<xsd:attribute name="key" type="gen:Reference" use="required"/>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="row" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="field" type="ComplexValue" maxOccurs="unbounded"/>
+					</xsd:sequence>
+					<xsd:attribute name="dummy" type="xsd:string"/>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ComplexValue">
+		<xsd:annotation>
+			<xsd:documentation>Represent a value taking the form of a basic type, a list of values or a table of values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:choice>
+			<xsd:element name="boolean" type="xsd:boolean"/>
+			<xsd:element name="number" type="xsd:long"/>
+			<xsd:element name="text" type="xsd:string"/>
+			<xsd:element name="refData" type="gen:ReferenceData"/>
+			<xsd:element name="date" type="xsd:date"/>
+			<xsd:element name="time" type="xsd:time"/>
+			<xsd:element name="dateTime" type="xsd:dateTime"/>
+			<xsd:element name="period" type="gen:Period"/>
+			<xsd:element name="amount" type="gen:Amount"/>
+			<xsd:element name="url" type="gen:URL"/>
+			<xsd:element name="table" type="ValueTable"/>
+			<xsd:element name="list" type="ValueList"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="CriteriaGroup">
+		<xsd:annotation>
+			<xsd:documentation>Represent a group of criterion with its grouping operator</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ItemReference">
+				<xsd:sequence>
+					<xsd:element name="criterion" type="ItemReference" minOccurs="0" maxOccurs="unbounded"/>
+					<xsd:element name="criteriaGroup" type="CriteriaGroup" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+				<xsd:attribute name="operator">
+					<xsd:simpleType>
+						<xsd:restriction base="xsd:NMTOKEN">
+							<xsd:enumeration value="AND"/>
+							<xsd:enumeration value="OR"/>
+						</xsd:restriction>
+					</xsd:simpleType>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CivilJusticeSimplePrimitiveDataElement">
+		<xsd:annotation>
+			<xsd:documentation>Primitive Data having a value of simple type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="SimpleValue">
+				<xsd:attribute name="key" type="gen:Reference" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CivilJusticePrimitiveDataElement">
+		<xsd:annotation>
+			<xsd:documentation>Primitive Data having a value of complex type</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="ComplexValue">
+				<xsd:attribute name="key" type="gen:Reference" use="required"/>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="CivilJusticeSearchDataElement">
+		<xsd:annotation>
+			<xsd:documentation>Primitive Data used for providing a search criteria (possibly multi-values)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="value" type="SimpleValue" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="key" type="gen:Reference" use="required"/>
+	</xsd:complexType>
+</xsd:schema>

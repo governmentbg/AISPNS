@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DeedV2" targetNamespace="http://www.registryagency.bg/schemas/comreg/notifications/v1" xmlns="http://www.registryagency.bg/schemas/comreg/notifications/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <!-- Nomenclaturi -->
+  <xs:simpleType name="LegalFormType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ET">
+        <xs:annotation>
+          <xs:documentation>
+            Едноличен търговец
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SD">
+        <xs:annotation>
+          <xs:documentation>
+            Събирателно дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KD">
+        <xs:annotation>
+          <xs:documentation>
+            Командитно дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OOD">
+        <xs:annotation>
+          <xs:documentation>
+            Дружество с ограничена отговорност
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EOOD">
+        <xs:annotation>
+          <xs:documentation>
+            Еднолично Дружество с ограничена отговорност
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AD">
+        <xs:annotation>
+          <xs:documentation>
+            Акционерно дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EAD">
+        <xs:annotation>
+          <xs:documentation>
+            Еднолично Акционерно дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IAD">
+        <xs:annotation>
+          <xs:documentation>
+            Акционерно дружество със специално инвестиционна цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IEAD">
+        <xs:annotation>
+          <xs:documentation>
+            Еднолично Акционерно дружество със специално инвестиционна цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KDA">
+        <xs:annotation>
+          <xs:documentation>
+            Командитно дружество с акции
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="K">
+        <xs:annotation>
+          <xs:documentation>
+            Кооперация
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KCHT">
+        <xs:annotation>
+          <xs:documentation>
+            Клон на чуждестранен търговец
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TPPD">
+        <xs:annotation>
+          <xs:documentation>
+            Търговец публично предприятие -държавно
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TPPO">
+        <xs:annotation>
+          <xs:documentation>
+            Търговец публично предприятие -общинско
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TPP">
+        <xs:annotation>
+          <xs:documentation>
+            Търговец публично предприятие да премехне и да се замени с горните две
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EUIE">
+        <xs:annotation>
+          <xs:documentation>
+            Европейско обединение по икономически интереси ЕОИИ
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DEUIE">
+        <xs:annotation>
+          <xs:documentation>
+            Поделение на ЕОИИ
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ED">
+        <xs:annotation>
+          <xs:documentation>
+            Европейско дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EKD">
+        <xs:annotation>
+          <xs:documentation>
+            Европейско кооперативно дружество
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LEKD">
+        <xs:annotation>
+          <xs:documentation>
+            Европейско кооперативно дружество с ограничена отговорност
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CHD">
+        <xs:annotation>
+          <xs:documentation>
+            Дружество регистрирано в юрисдикция с преференциален данъчен режим
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <!--PROGRAMER1-->
+      <xs:enumeration value="CHDF">
+        <xs:annotation>
+          <xs:documentation>
+            Чуждестранно дружество - физическо лице
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <!--PROGRAMER1-->
+      <xs:enumeration value="CHDU">
+        <xs:annotation>
+          <xs:documentation>
+            Чуждестранно дружество - юридическо лице
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ASSOC">
+        <xs:annotation>
+          <xs:documentation>
+            Сдружение - юридическо лице с нестопанска цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FOUND">
+        <xs:annotation>
+          <xs:documentation>
+            Фондация - юридическо лице с нестопанска цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BFLE">
+        <xs:annotation>
+          <xs:documentation>
+            Клон на ЧЮЛНЦ - юридическо лице с нестопанска цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CC">
+        <xs:annotation>
+          <xs:documentation>
+            Читалище - юридическо лице с нестопанска цел
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="-1"></xs:enumeration>
+      <!--
+				  
+		ET		= 1, //	Едноличен търговец
+		SD		= 2, //	Събирателно дружество
+		KD		= 3, //	Командитно дружество
+		OOD		= 4, //	Дружество с ограничена отговорност
+		EOOD	= 10,//Еднолично Дружество с ограничена отговорност
+		AD		= 5, //	Акционерно дружество
+		EAD		= 11,// Еднолично Акционерно дружество
+		IAD		= 12,// Акционерно дружество със специално инвестиционна цел
+    IEAD  = 15,// Еднолично Акционерно дружество със специално инвестиционна цел
+		KDA		= 6, //	Командитно дружество с акции
+		K		  = 7, //	Кооперация
+		KCHT	= 8, //	Клон на чуждестранен търговец
+		TPPD	= 13,//	Търговец публично предприятие -държавно
+		TPPO	= 14,//	Търговец публично предприятие -общинско
+		TPP		= 9, //	Търговец публично предприятие да премехне и да се замени с горните две
+	  EUIE  = 16,// Европейско обединение по икономически интереси ЕОИИ
+    DEUIE = 17,// Поделение на ЕОИИ (Division Of EUIE)
+    ED    = 18,// Европейско дружество
+    EKD   = 19,// Европейско кооперативно дружество
+    LEKD  = 20 // Европейско кооперативно дружество с ограничена отговорност (Limited EKD)	
+    ASSOC = 24,// Сдружение
+    FOUND = 25,// Фондация
+    BFLE  = 26,// Клон на чуждестранно юридическо лице с нестопанска цел
+    CC    = 27 // Читалище
+				 -->
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NotificationType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NRA_Art_100_1">
+        <xs:annotation>
+          <xs:documentation>
+            Чл. 100, ал. 1 от ЗДДС
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NRA_Art_100_2">
+        <xs:annotation>
+          <xs:documentation>
+            Чл. 100, ал. 2 от ЗДДС
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AddressType">
+    <xs:sequence>
+      <xs:element name="CountryID" nillable="true" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="CountryCode" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Country" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="IsForeign" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="DistrictID" nillable="true"  type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="DistrictEkatte" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="District" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Municipalityid" nillable="true"  type="xs:string"  minOccurs="1" maxOccurs="1" />
+      <xs:element name="MunicipalityEkatte" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Municipality" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="SettlementID" nillable="true"  type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="SettlementEKATTE" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Settlement" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="AreaID" nillable="true"  type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Area" type="xs:string" minOccurs="1" maxOccurs="1"  />
+      <xs:element name="AreaEkatte" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="PostCode" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="ForeignPlace" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="HousingEstate" type="xs:string"  minOccurs="1" maxOccurs="1" />
+      <xs:element name="Street" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="StreetNumber" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Block" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Entrance" type="xs:string"  minOccurs="1" maxOccurs="1" />
+      <xs:element name="Floor" type="xs:string"  minOccurs="1" maxOccurs="1"  />
+      <xs:element name="Apartment" type="xs:string" minOccurs="1" maxOccurs="1"  />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PersonType">
+    <xs:sequence>
+      <xs:element name="Indent" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IndentType" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="CountryID" type="xs:long" minOccurs="1" maxOccurs="1" nillable="true"></xs:element>
+      <xs:element name="CountryName" type="xs:string" minOccurs="1" maxOccurs="1"></xs:element>
+    </xs:sequence>
+    <xs:attribute name="CompetentAuthorityForRegistration" type="xs:string">
+    </xs:attribute>
+    <xs:attribute name="RegistrationNumber" type="xs:string">
+    </xs:attribute>
+    <xs:attribute name="IsForeignTraderText" type="xs:int">
+    </xs:attribute>
+    <xs:attribute name="ForeignLegalFormCode" type="xs:string"></xs:attribute>
+    <xs:attribute name="ForeignRegisterCode" type="xs:string"></xs:attribute>
+    <xs:attribute name="CountryCode" type="xs:string"></xs:attribute>
+    <xs:attribute name="CountryCodeBRIS" type="xs:string"></xs:attribute>
+    <xs:attribute name="LegalForm" type="xs:string"></xs:attribute>
+    <xs:attribute name="Position" type="xs:string"></xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="PassportType">
+    <xs:sequence>
+      <xs:element name="Number" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IssueDate" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="IssuedFrom" type="xs:string" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BirthPlace">
+    <xs:sequence>
+      <xs:element name="Country" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Place" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Deputy">
+    <xs:all></xs:all>
+  </xs:complexType>
+  <xs:complexType name="Applicants">
+    <xs:sequence>
+      <xs:element name="Applicant" minOccurs="1" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:all>
+            <xs:element name="Person" type="PersonType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="BirthPlace" type="BirthPlace" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Address" type="AddressType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Passport" type="PassportType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="Deputy" type="Deputy" minOccurs="1" maxOccurs="1" />
+          </xs:all>
+          <xs:attribute name="ApplicantGuid" type="xs:string" use="required" />
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FieldsType">
+    <xs:sequence>
+      <xs:element name="Applicants" type="Applicants" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Данни за заявител
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NotificationInfoType">
+    <xs:sequence>
+      <xs:element name="Fields" type="FieldsType" minOccurs="1" maxOccurs="1">
+      </xs:element>
+    </xs:sequence>    
+    <xs:attribute name="NotificationID" type="xs:string" use="required" />
+    <xs:attribute name="NotificationType" type="NotificationType" use="required" />
+    <xs:attribute name="Recipient" type="xs:string" use="required" />
+    <xs:attribute name="IncomingNumber" type="xs:string" use="required" />
+    <xs:attribute name="EntryNumber" type="xs:string" use="required" />
+    <xs:attribute name="EntryDate" type="xs:dateTime" use="required" />
+    <xs:attribute name="UIC" type="xs:string" use="required" />
+    <xs:attribute name="CompanyName" type="xs:string" use="required" />
+    <xs:attribute name="LegalForm" type="LegalFormType" use="required" />
+  </xs:complexType>
+  <xs:element name="NotificationInfo" type="NotificationInfoType">
+  </xs:element>
+
+</xs:schema>

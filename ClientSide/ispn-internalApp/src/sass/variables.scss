@@ -1,0 +1,68 @@
+@import 'node_modules/vuetify/src/styles/tools/_functions.sass';
+
+$font-size-root: 14px;
+$sheet-border-radius: 4px;
+$list-item-title-font-size: 0.929rem;
+$list-item-dense-title-font-size: 0.929rem;
+$list-item-dense-title-font-weight: 400 !default;
+$fab-icon-sizes: ( small: 20 );
+$btn-font-sizes: ( default: 1rem, large: 1rem );
+$btn-sizes: ( default: 41, large: 54 );
+$btn-letter-spacing: 0;
+$btn-font-weight: 400;
+$card-text-font-size: 16px;
+
+$spacer: 4px !default;
+$grid-gutter: $spacer * 6 !default;
+$form-grid-gutter: $spacer * 2 !default;
+$grid-columns: 12 !default;
+
+$container-padding-x: $grid-gutter / 2 !default;
+
+/* colors */
+//$primary: #1b61ac;
+$primary: #8a6948;
+$secondary: #184c7c;
+$accent: #ffde00;
+$info: #45aebb;
+$success: #63a14c;
+
+$headings: (
+  'h1': (
+    'size': 3.3125rem,
+    'line-height': 1.15em
+  ),
+  'h2': (
+    'size': 2.25rem,
+    'line-height': 1.5em
+  ),
+  'h3': (
+    'size': 1.5625rem,
+    'line-height': 1.4em
+  ),
+  'h4': (
+    'size': 1.125rem,
+    'line-height': 1.4em
+  ),
+  'h5': ( 'size': 1.0625rem ),
+  'h6': ( 'size': .75rem ),
+  'subtitle-2': ( 'size': 1rem ),
+  'overline': ( 'letter-spacing': 0 )
+);
+
+$grid-gutters: () !default;
+$grid-gutters: map-deep-merge(
+  (
+    // 'xs': $grid-gutter / 12,
+    // 'sm': $grid-gutter / 6,
+    // 'md': $grid-gutter / 3,
+    //'lg': $grid-gutter * 2/3,
+    
+    'xs': $grid-gutter / 12,
+    'sm': $grid-gutter / 9,
+    'md': $grid-gutter / 8,
+    'lg': $grid-gutter * 6,
+    'xl': $grid-gutter * 10
+  ),
+  $grid-gutters
+);

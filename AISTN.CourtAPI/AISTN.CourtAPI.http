@@ -1,0 +1,6 @@
+@AISTN.CourtAPI_HostAddress = http://localhost:5209
+
+GET {{AISTN.CourtAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

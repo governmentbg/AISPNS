@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://e-justice.europa.eu/model/iri/v2" xmlns:gquery="http://e-justice.europa.eu/model/generic-query/v2" xmlns:gen="http://e-justice.europa.eu/model/common/v2" targetNamespace="http://e-justice.europa.eu/model/iri/v2" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">A schema for the definition of entities involved in IRI operations
+			=== HISTORY===
+	2.00 - first release of the schema to the Member States
+
+	</xsd:documentation>
+	</xsd:annotation>
+	<xsd:import namespace="http://e-justice.europa.eu/model/common/v2" schemaLocation="../../common/v2/GenericTypes.xsd"/>
+	<xsd:import namespace="http://e-justice.europa.eu/model/generic-query/v2" schemaLocation="../../generic-query/v2/GenericQuery.xsd"/>
+	<xsd:complexType name="CoreInsolvencyRecord">
+		<xsd:annotation>
+			<xsd:documentation>Core definition of an insolvency record presenting information as defined in regulation</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="caseNumber" type="gen:Reference" minOccurs="0"/>
+			<xsd:element name="type" type="gen:Reference"/>
+			<xsd:element name="subType" type="gen:Reference" minOccurs="0"/>
+			<xsd:element name="jurisdiction" type="gen:Reference"/>
+			<xsd:element name="openingDate" type="xsd:date"/>
+			<xsd:element name="closingDate" type="xsd:date" minOccurs="0"/>
+			<xsd:element name="debtor">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="legalPerson" type="LegalPerson"/>
+						<xsd:element name="naturalPerson" type="NaturalPerson"/>
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="court" type="Court"/>
+			<xsd:element name="insolvencyPractitioner" minOccurs="0" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="InsolvencyPractitioner">
+							<xsd:attribute name="role">
+								<xsd:simpleType>
+									<xsd:restriction base="gen:Reference">
+										<xsd:pattern value="MAIN"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="appealInformation" type="AppealInformation"/>
+			<xsd:element name="claimInformation" type="ClaimInformation"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InsolvencyRecord">
+		<xsd:annotation>
+			<xsd:documentation>Extended structure of core definition with optional MS information defined as key-value pairs grouped in sections</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="CoreInsolvencyRecord">
+				<xsd:sequence>
+					<xsd:element name="section" minOccurs="0" maxOccurs="unbounded">
+						<xsd:complexType>
+							<xsd:complexContent>
+								<xsd:extension base="gquery:ItemReference">
+									<xsd:sequence>
+										<xsd:element name="field" type="gquery:CivilJusticePrimitiveDataElement" maxOccurs="unbounded"/>
+									</xsd:sequence>
+								</xsd:extension>
+							</xsd:complexContent>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="RequestForm">
+		<xsd:annotation>
+			<xsd:documentation>Structure of form used for requesting information on natural person conditiional to demonstrating legitimate interest</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="requester">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="name" type="gen:Name"/>
+						<xsd:element name="contact" type="gen:BasicContactInformation"/>
+						<xsd:element name="address" type="gen:Address" minOccurs="0"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="debtor">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:choice>
+							<xsd:element name="name" type="gen:Name"/>
+							<xsd:element name="registrationNumber" type="gen:Reference"/>
+						</xsd:choice>
+						<xsd:element name="personalInformation">
+							<xsd:complexType>
+								<xsd:sequence>
+									<xsd:element name="nationalRegistrationNumber" type="gen:Reference" minOccurs="0"/>
+									<xsd:element name="nationality" type="gen:Country" minOccurs="0"/>
+									<xsd:element name="birthInformation" type="gen:BirthInformation" minOccurs="0"/>
+								</xsd:sequence>
+							</xsd:complexType>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="justification">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="explanation" type="xsd:string"/>
+						<xsd:element name="attachment" type="gen:Attachment" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Court">
+		<xsd:sequence>
+			<xsd:element name="name" type="xsd:string"/>
+			<xsd:element name="contact" type="gen:BasicContactInformation" minOccurs="0"/>
+			<xsd:element name="address" type="gen:Address" minOccurs="0"/>
+			<xsd:element name="webSite" type="gen:BasicURL" minOccurs="0"/>
+			<xsd:element name="judgeInCharge" type="gen:Name" minOccurs="0"/>
+		</xsd:sequence>
+		<xsd:attribute name="cdbId" type="xsd:token"/>
+	</xsd:complexType>
+	<xsd:complexType name="LegalPerson">
+		<xsd:sequence>
+			<xsd:element name="name" maxOccurs="unbounded">
+				<xsd:complexType>
+					<xsd:simpleContent>
+						<xsd:extension base="xsd:string">
+							<xsd:attribute name="type">
+								<xsd:simpleType>
+									<xsd:restriction base="gen:Reference">
+										<xsd:enumeration value="PRIMARY"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:simpleContent>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="registrationNumber" type="gen:Reference"/>
+			<xsd:element name="address">
+				<xsd:complexType>
+					<xsd:complexContent>
+						<xsd:extension base="gen:Address">
+							<xsd:attribute name="type" use="required">
+								<xsd:simpleType>
+									<xsd:restriction base="gen:Reference">
+										<xsd:enumeration value="POSTAL"/>
+										<xsd:enumeration value="OFFICE"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:attribute>
+						</xsd:extension>
+					</xsd:complexContent>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="NaturalPerson">
+		<xsd:complexContent>
+			<xsd:extension base="gen:Name">
+				<xsd:sequence>
+					<xsd:element name="registrationNumber" type="xsd:token" minOccurs="0"/>
+					<xsd:choice>
+						<xsd:element name="address" type="gen:Address"/>
+						<xsd:element name="birthInformation" type="gen:BirthInformation"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	<xsd:complexType name="InsolvencyPractitioner">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="person" type="gen:Name"/>
+				<xsd:element name="company">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="name" type="xsd:string"/>
+							<xsd:element name="representative" type="gen:Name" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:choice>
+			<xsd:element name="contact" type="gen:BasicContactInformation" minOccurs="0"/>
+			<xsd:element name="address" type="gen:Address" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="Deadline">
+		<xsd:choice>
+			<xsd:element name="endDate" type="xsd:date"/>
+			<xsd:element name="computation" type="gquery:ValueList"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="AppealInformation">
+		<xsd:sequence>
+			<xsd:element name="court" type="Court"/>
+			<xsd:element name="deadLine" type="Deadline" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ClaimInformation">
+		<xsd:sequence>
+			<xsd:element name="deadLine" type="Deadline" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>
